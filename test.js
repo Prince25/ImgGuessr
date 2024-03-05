@@ -1,5 +1,4 @@
-
-import { compareTwoStrings } from "string-similarity";
+const compareTwoStrings = require("string-similarity").compareTwoStrings;
 
 const x = "wedding rings on the nose of a teddy bear"
 

@@ -1,0 +1,23 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#image {
+    border: 2px solid black;
+    margin-bottom: 20px;
+    max-height: 720px;
+    max-width: 1280px;
+}

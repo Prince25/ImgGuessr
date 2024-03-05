@@ -1,8 +1,20 @@
 {
-  "type": "module",
+  "name": "ImgGuessr",
+  "version": "1.0.0",
+  "description": "Guess the title of the image!",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Prabhjot SIngh",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^10.0.0",
     "shutterstock-api": "^1.1.7",
     "string-similarity": "^4.0.4"
+  },
+  "devDependencies": {
+    "electron": "^29.1.0"
   }
 }

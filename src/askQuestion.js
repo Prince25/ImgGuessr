@@ -1,6 +1,6 @@
-import readline from "readline";
+const readline = require("readline");
 
-export default function askQuestion(query) {
+module.exports = function askQuestion(query) {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,

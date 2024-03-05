@@ -1,9 +1,10 @@
-import fs from "fs";
-import print from "./printToConsole.js";
+const fs = require("fs");
+const print = require("./printToConsole.js");
+
 
 let saveFileName = "";
 
-export function initializeSaveFile(fileName) {
+function initializeSaveFile(fileName) {
     print("setup", "Checking for save file...");
     saveFileName = "./data/" + fileName + ".json";
 
@@ -16,7 +17,7 @@ export function initializeSaveFile(fileName) {
     }
 }
 
-export function loadSaveFile() {
+function loadSaveFile() {
     try {
         return JSON.parse(fs.readFileSync(saveFileName));
     } catch (error) {
@@ -25,7 +26,7 @@ export function loadSaveFile() {
     }
 }
 
-export function saveFile(data) {
+function saveFile(data) {
     try {
         const old = loadSaveFile();
         data = Object.assign(old, data);
@@ -34,3 +35,9 @@ export function saveFile(data) {
         print("error", error);
     }
 }
+
+module.exports = {
+    initializeSaveFile,
+    loadSaveFile,
+    saveFile
+};
