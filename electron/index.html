@@ -5,19 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ImgGuessr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Righteous&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
-
 <body>
-    <div id="image-container">
-        <img id="image" src="" alt="Shutterstock image">
+    <div class="game-container">
+        <header>
+            <h1 class="game-title">ImgGuessr</h1>
+        </header>
+        
+        <div class="game-area">
+            <div id="image-container">
+                <img id="image" src="" alt="Shutterstock image">
+                <div id="loading-spinner" class="spinner hidden"></div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="guess" placeholder="What do you see in this image?">
+                <button id="submit" class="btn btn-submit">Submit</button>
+                <button id="continue" class="btn btn-new">New Image</button>
+            </div>
+            
+            <div class="feedback-area">
+                <div id="score" class="score"></div>
+                <div id="answer" class="answer"></div>
+            </div>
+        </div>
     </div>
-    <input type="text" id="guess" placeholder="Enter your guess">
-    <button id="submit">Submit</button>
-    <div id="score"></div>
-    <div id="answer"></div>
-    <button id="continue">Continue Playing</button>
 
     <script src="renderer.js"></script>
 </body>

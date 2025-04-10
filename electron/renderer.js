@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', async () => {
     const imageContainer = document.getElementById('image-container');
     const imageElement = document.getElementById('image');
@@ -7,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const scoreElement = document.getElementById('score');
     const answerElement = document.getElementById('answer');
     const continueButton = document.getElementById('continue');
+    const loadingSpinner = document.getElementById('loading-spinner');
 
     let currentImage;
 
@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         scoreElement.textContent = '';
         answerElement.textContent = '';
     }
-
 
     function submitGuess() {
         let guess, imageName;
@@ -34,18 +33,55 @@ document.addEventListener('DOMContentLoaded', async () => {
         answerElement.textContent = `Answer: ${imageName}`;
     }
 
-
     async function continuePlaying() {
-        currentImage = await window.api.getImage();
-        updateUI();
+        // Show loading spinner and hide current image
+        loadingSpinner.classList.remove('hidden');
+        imageElement.style.visibility = 'hidden';
+        
+        try {
+            // Get new image
+            currentImage = await window.api.getImage();
+            
+            // Preload the image
+            const img = new Image();
+            img.onload = () => {
+                // When image is loaded, update UI and hide spinner
+                updateUI();
+                imageElement.style.visibility = 'visible';
+                loadingSpinner.classList.add('hidden');
+                guessInput.focus();
+            };
+            
+            img.onerror = () => {
+                // In case of error, still hide spinner
+                loadingSpinner.classList.add('hidden');
+                imageElement.style.visibility = 'visible';
+                console.error("Failed to load image");
+            };
+            
+            img.src = currentImage.image_url;
+        } catch (error) {
+            console.error("Error loading new image:", error);
+            loadingSpinner.classList.add('hidden');
+            imageElement.style.visibility = 'visible';
+        }
+        
+        // Clear any existing guess
         guessInput.value = '';
-        guessInput.focus();
     }
 
-
+    // Add event listeners for clicks
     submitButton.addEventListener('click', submitGuess);
     continueButton.addEventListener('click', continuePlaying);
+    
+    // Add event listener for Enter key
+    guessInput.addEventListener('keyup', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            submitGuess();
+        }
+    });
 
-
+    // Initial load
     await continuePlaying();
 });
